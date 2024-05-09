@@ -1,7 +1,6 @@
 
 $(document).ready(function () {
   sesionIniciada();
-  
 });
 
 var $pagina = 0;

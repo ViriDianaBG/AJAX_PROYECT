@@ -8,7 +8,7 @@
   </head>
 
   <body>
-    <h3> Punto de venta </h3>
+    <h3> Página cajero </h3>
     <button id="cerrarSesion">Cerrar</button>
   </body>
 
