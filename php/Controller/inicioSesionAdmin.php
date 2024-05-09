@@ -18,6 +18,7 @@ if (isset($_POST['email']) && isset($_POST['contrasenia'])) {
       session_start();
       $_SESSION['email'] = $email;
       $_SESSION['estado'] = 'Autenticado';
+      $_SESSION['tipo'] = 'admin';
       echo 200;
     } else {
       echo 401;

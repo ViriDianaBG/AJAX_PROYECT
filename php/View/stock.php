@@ -46,6 +46,9 @@
       
     </tbody>
   </table>
+  <button id="agregarBoton">Agregar</button>
+  <button id="editarBoton">Editar</button>
+  <button id="eliminarBoton">Eliminar</button>
   <button id="menuBoton">Menu</button>
 </body>
 </html>
