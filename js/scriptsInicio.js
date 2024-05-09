@@ -87,42 +87,57 @@ function sesionIniciada() {
     type: "POST",
     success: function (response) {
       console.log(response);
-      if (response == 200) {
-        console.log("Sesión iniciada");
-        $("#contenedor").load("php/View/paginaCajero.php");
-        cerrarSesion();
-      } else {
+      if(parseInt(response) == 200){
+        console.log("HOLA");
+        console.log("Sesión iniciada CAJERO");
+        $("#contenedor").load("php/View/paginaCajero.php",function(){
+           cerrarSesion();
+        });
+      }else if(parseInt(response) == 201){
+        console.log("Sesión iniciada ADMIN");
+        $("#contenedor").load("php/View/paginaAdmin.php",function(){
+            cerrarSesion();
+            usuarioBtn();
+            productoBtn();
+            proveedorBtn();
+
+        });
+             
+      }else {
         console.log("Sesión no iniciada");
         $("#contenedor").load("php/View/inicio.php", function () {
-            $("#cajeroBoton").click(function () {
-              $.ajax({
-                url: "php/View/inicioSesionCajero.php",
-                type: "POST",
-                success: function (response) {
-                  
-                  $("#contenedor").html(response);
-                  formularioInicioSesionCajero();
-                },
-              });
+          $("#cajeroBoton").click(function () {
+            $.ajax({
+              url: "php/View/inicioSesionCajero.php",
+              type: "POST",
+              success: function (response) {
+                $("#contenedor").html(response);
+                formularioInicioSesionCajero();
+              },
             });
+          });
 
-            $("#administradorBoton").click(function () {
-              $.ajax({
-                url: "php/View/inicioSesionAdmin.php",
-                type: "POST",
-                success: function (response) {
-                  console.log("Condicional");
-                  $("#contenedor").html(response);
-                  formularioInicioSesionAdmin();
-                },
-              });
+          $("#administradorBoton").click(function () {
+            $.ajax({
+              url: "php/View/inicioSesionAdmin.php",
+              type: "POST",
+              success: function (response) {
+                console.log("Condicional");
+                $("#contenedor").html(response);
+                formularioInicioSesionAdmin();
+              },
             });
-          
+          });
         });
       }
+      cerrarSesion();
     },
+    error: function () {
+      console.log("Error al verificar el estado de la sesión.");
+    }
   });
 }
+
 
 function usuarioBtn(){
   console.log("Funcion usuarioBtn");

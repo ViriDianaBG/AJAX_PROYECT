@@ -89,7 +89,7 @@ class Cajero
   }
 
   //Todos los cajeros
-  public function obtenerCajero()
+  public function obtenerCajeros()
   {
     $stmt = $this->db->prepare("SELECT * FROM cajeros");
     $stmt->execute();
@@ -100,6 +100,28 @@ class Cajero
     }
     return $cajeros;
   }
+
+   public function obtenerCajero(){
+     $email = $_SESSION['email'];
+     $stmt = $this->db->prepare("SELECT c.id_Cajeros, c.nombre,c.apellido_paterno, c.apellido_materno, c.telefono, c.email, c.direccion, tu.nombre AS tipo_usuario
+    FROM mydb.Cajeros c
+    INNER JOIN mydb.Tipo_Usuario tu ON c.tipo_Usuario = tu.id_Tipo_Usuario
+    WHERE c.id_Cajeros = ?;
+    ");
+    $stmt->execute([$email]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    $id_Cajero = $row['id_Cajero'];
+    $nombre = $row['nombre'];
+    $apellido_paterno = $row['apellido_paterno'];
+    $apellido_materno = $row['apellido_materno'];
+    $telefono = $row['telefono'];
+    $email = $row['email'];
+    $direccion = $row['direccion'];
+
+    return new Cajero($id_Cajero, $nombre, $apellido_paterno, $apellido_materno, $telefono, $email, $direccion);
+  }
+
 
   //Cajero por id
   public function obtenerCajeroID($id_Cajero)
@@ -129,7 +151,7 @@ class Cajero
     }
 
     //Actualizar cajero
-    public function actualizarCajero($id_Cajero) {
+    public function editarCajero($id_Cajero) {
         $stmt = $this->db->prepare("UPDATE cajeros SET nombre = ?, numero = ?, email = ?, direccion = ? WHERE id_Cajero = ?");
         $stmt->execute([$this->nombre, $this->numero, $this->email, $this->direccion, $id_Cajero]);
         return $stmt->rowCount();
