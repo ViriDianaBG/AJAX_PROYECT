@@ -8,84 +8,28 @@ class Cajero
 {
   private $id_Cajero;
   private $nombre;
-  private $numero;
+  private $apellidoPaterno;
+  private $apellidoMaterno;
+  private $telefono;
   private $email;
   private $direccion;
   private $contrasenia;
   private $db;
 
-  public function __construct($id = null, $nombre = null, $apellidoPaterno = null, $apellidoMaterno = null, $nss = null, $email = null, $db) {
+  private $tipo_usuario = 2;
+  // Constructor with default null values
+  public function __construct($id_Cajero = null, $nombre = null, $apellidoPaterno = null, $apellidoMaterno = null, $telefono = null, $email = null, $direccion = null, $contrasenia = null, $db = null)
+  {
     global $db;
-    $this->id = $id;
+    $this->id_Cajero = $id_Cajero;
     $this->nombre = $nombre;
     $this->apellidoPaterno = $apellidoPaterno;
     $this->apellidoMaterno = $apellidoMaterno;
-    $this->nss = $nss;
+    $this->telefono = $telefono;
     $this->email = $email;
-    $this->db = $db;
-}
-
-
-  // Getters
-  public function getIdCajero()
-  {
-    return $this->id_Cajero;
-  }
-
-  public function getNombre()
-  {
-    return $this->nombre;
-  }
-
-  public function getNumero()
-  {
-    return $this->numero;
-  }
-
-  public function getEmail()
-  {
-    return $this->email;
-  }
-
-  public function getDireccion()
-  {
-    return $this->direccion;
-  }
-
-  public function getContrasenia()
-  {
-    return $this->contrasenia;
-  }
-
-  // Setters
-  public function setIdCajero($id_Cajero)
-  {
-    $this->id_Cajero = $id_Cajero;
-  }
-
-  public function setNombre($nombre)
-  {
-    $this->nombre = $nombre;
-  }
-
-  public function setNumero($numero)
-  {
-    $this->numero = $numero;
-  }
-
-  public function setEmail($email)
-  {
-    $this->email = $email;
-  }
-
-  public function setDireccion($direccion)
-  {
     $this->direccion = $direccion;
-  }
-
-  public function setContrasenia($contrasenia)
-  {
     $this->contrasenia = $contrasenia;
+    $this->db = $db;
   }
 
   //Todos los cajeros
@@ -94,21 +38,47 @@ class Cajero
     $stmt = $this->db->prepare("SELECT * FROM cajeros");
     $stmt->execute();
     $cajeros = [];
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-      $cajero = new Cajero($row['id_Cajero'], $row['nombre'], $row['numero'], $row['email'], $row['direccion'], $this->db);
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
+    {
+      $cajero = new Cajero($row['id_Cajero'], $row['nombre'], $row['apellido_paterno'], $row['apellido_materno'], $row['email'], $row['direccion']);
       $cajeros[] = $cajero;
     }
     return $cajeros;
   }
 
-   public function obtenerCajero(){
-     $email = $_SESSION['email'];
-     $stmt = $this->db->prepare("SELECT c.id_Cajeros, c.nombre,c.apellido_paterno, c.apellido_materno, c.telefono, c.email, c.direccion, tu.nombre AS tipo_usuario
-    FROM mydb.Cajeros c
-    INNER JOIN mydb.Tipo_Usuario tu ON c.tipo_Usuario = tu.id_Tipo_Usuario
-    WHERE c.id_Cajeros = ?;
-    ");
-    $stmt->execute([$email]);
+  // Agregar nuevo cajero con tipo de usuario
+  public function agregarCajero()
+{
+    $stmt = $this->db->prepare("INSERT INTO cajeros (nombre, apellido_paterno, apellido_materno, telefono, email, direccion, contrasenia, tipo_usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->execute([$this->nombre, $this->apellidoPaterno, $this->apellidoMaterno, $this->telefono, $this->email, $this->direccion, $this->contrasenia, $this->tipo_usuario]);
+
+    // Obtener el ID generado automáticamente
+    $this->id_Cajero = $this->db->lastInsertId();
+
+    return $stmt->rowCount();
+}
+
+  //Eliminar cajero
+  public function eliminarCajero($id_Cajero)
+  {
+    $stmt = $this->db->prepare("DELETE FROM cajeros WHERE id_Cajero = ?");
+    $stmt->execute([$id_Cajero]);
+    return $stmt->rowCount();
+  }
+
+  // Actualizar cajero
+  public function actualizarCajero()
+  {
+    $stmt = $this->db->prepare("UPDATE cajeros SET nombre = ?, apellido_paterno = ?, apellido_materno = ?, telefono = ?, email = ?, direccion = ? WHERE id_Cajero = ?");
+    $stmt->execute([$this->nombre, $this->apellidoPaterno, $this->apellidoMaterno, $this->telefono, $this->email, $this->direccion,$this->id_Cajero]);
+    return $stmt->rowCount(); // Regresa el número de filas afectadas
+  }
+
+  // Obtener usuario por id
+  public function obtenerCajeroPorId($id)
+  {
+    $stmt = $this->db->prepare("SELECT * FROM cajeros WHERE id_Cajero = ?");
+    $stmt->execute([$id]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     $id_Cajero = $row['id_Cajero'];
@@ -122,45 +92,83 @@ class Cajero
     return new Cajero($id_Cajero, $nombre, $apellido_paterno, $apellido_materno, $telefono, $email, $direccion);
   }
 
-
-  //Cajero por id
-  public function obtenerCajeroID($id_Cajero)
+  public function getIdCajero()
   {
-    $stmt = $this->db->prepare("SELECT * FROM cajeros WHERE id_Cajeros = :id_Cajero");
-    $stmt->bindParam(':id_Cajero', $id_Cajero);
-    $stmt->execute();
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    $cajero = new Cajero($row['id_Cajero'], $row['nombre'], $row['numero'], $row['email'], $row['direccion'], $this->db);
-    return $cajero;
+    return $this->id_Cajero;
   }
 
-  //Agregar cajero
- public function agregarCajero() {
-    $stmt = $this->db->prepare("INSERT INTO cajeros (nombre, numero, email, direccion, contrasenia) VALUES (?, ?, ?, ?, ?)");
-    $stmt->execute([$this->nombre, $this->numero, $this->email, $this->direccion, $this->contrasenia]);
-    $this->id_Cajero = $this->db->lastInsertId();
-    return $this->id_Cajero;
-}
+  public function setIdCajero($id_Cajero)
+  {
+    $this->id_Cajero = $id_Cajero;
+  }
 
+  public function getNombre()
+  {
+    return $this->nombre;
+  }
 
-    //Eliminar cajero
-    public function eliminarCajero($id_Cajero) {
-        $stmt = $this->db->prepare("DELETE FROM cajeros WHERE id_Cajero = ?");
-        $stmt->execute([$id_Cajero]);
-        return $stmt->rowCount();
-    }
+  public function setNombre($nombre)
+  {
+    $this->nombre = $nombre;
+  }
 
-    //Actualizar cajero
-    public function editarCajero($id_Cajero) {
-        $stmt = $this->db->prepare("UPDATE cajeros SET nombre = ?, numero = ?, email = ?, direccion = ? WHERE id_Cajero = ?");
-        $stmt->execute([$this->nombre, $this->numero, $this->email, $this->direccion, $id_Cajero]);
-        return $stmt->rowCount();
-    }
+  public function getApellidoPaterno()
+  {
+    return $this->apellidoPaterno;
+  }
 
+  public function setApellidoPaterno($apellidoPaterno)
+  {
+    $this->apellidoPaterno = $apellidoPaterno;
+  }
 
+  public function getApellidoMaterno()
+  {
+    return $this->apellidoMaterno;
+  }
 
+  public function setApellidoMaterno($apellidoMaterno)
+  {
+    $this->apellidoMaterno = $apellidoMaterno;
+  }
 
+  public function getTelefono()
+  {
+    return $this->telefono;
+  }
 
+  public function setTelefono($telefono)
+  {
+    $this->telefono = $telefono;
+  }
 
+  public function getEmail()
+  {
+    return $this->email;
+  }
 
+  public function setEmail($email)
+  {
+    $this->email = $email;
+  }
+
+  public function getDireccion()
+  {
+    return $this->direccion;
+  }
+
+  public function setDireccion($direccion)
+  {
+    $this->direccion = $direccion;
+  }
+
+  public function getContrasenia()
+  {
+    return $this->contrasenia;
+  }
+
+  public function setContrasenia($contrasenia)
+  {
+    $this->contrasenia = $contrasenia;
+  }
 }
