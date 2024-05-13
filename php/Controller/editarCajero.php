@@ -25,7 +25,7 @@ if (isset($_POST['id']))
     echo "Email: <input type='text' name='email' id='email'  value='". $cajero->getEmail() ."'><br>";
     echo "Telefono: <input type='text' name='telefono' id='telefono' value='".$cajero->getTelefono()."'><br>";
     echo "Direccion: <input type='text' name='direccion' id='direccion' value='".$cajero->getDireccion(). "'><br>";
-    
+
     echo "<input type='submit' value='Editar'>";             
     echo "</form>";
 }

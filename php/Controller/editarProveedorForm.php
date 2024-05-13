@@ -20,7 +20,7 @@ if(isset($_POST['id']))
     echo "Direccion: <input type='text' name='direccion' id='direccion' value='". $proveedor->getDireccion()."'><br>";
     echo "Telefono: <input type='text' name='telefono' id='telefono' value='". $proveedor->getTelefono() ."'><br>";
     echo "Email: <input type='text' name='email' id='email' value='". $proveedor->getEmail() ."'><br>";
-    echo "<input type='submit' value='Agregar'>";             
+    echo "<input type='submit' value='Editar'>";             
     echo "</form>";
 }
 else

@@ -2,10 +2,10 @@
 
 include '../BaseDatos/conexion.php';
 
-session_start();
+//session_start();
 
 class Proveedor{
-    private $id_proveedor;
+    private $id_Proveedor;
     private $nombre;
     private $direccion;
     private $telefono;
@@ -13,10 +13,10 @@ class Proveedor{
     private $id_TipoUsuario = 3;
     private $db;
 
-    public function __construct($id_proveedor = null, $nombre = null,$direccion = null, $telefono = null, $email = null,  $db = null)
+    public function __construct($id_Proveedor = null, $nombre = null,$direccion = null, $telefono = null, $email = null,  $db = null)
     {
         global $db;
-        $this->id_proveedor = $id_proveedor;
+        $this->id_Proveedor = $id_Proveedor;
         $this->nombre = $nombre;
         $this->direccion = $direccion;
         $this->telefono = $telefono;
@@ -26,7 +26,7 @@ class Proveedor{
 
     public function getIdProveedor()
     {
-        return $this->id_proveedor;
+        return $this->id_Proveedor;
     }
 
     public function setIdProveedor($id_proveedor)
@@ -87,29 +87,29 @@ class Proveedor{
 
     public function agregarProveedor()
     {
-        $stmt = $this->db->prepare("INSERT INTO proveedor (id_TipoUsuario, nombre, direccion, telefono, email) VALUES (?, ?, ?, ?)");
+        $stmt = $this->db->prepare("INSERT INTO proveedor (id_TipoUsuario, nombre, direccion, telefono, email) VALUES (?, ?, ?, ?, ?)");
 
         $stmt->execute([
             $this->id_TipoUsuario,
             $this->nombre, $this->direccion, $this->telefono, $this->email]);
 
-        $this->id_proveedor = $this->db->lastInsertId();
+        $this->id_Proveedor = $this->db->lastInsertId();
 
         return $stmt->rowCount();
 
     }
 
-    public function eliminarProveedor()
+    public function eliminarProveedor($id_Proveedor)
     {
         $stmt = $this->db->prepare("DELETE FROM proveedor WHERE id_Proveedor = ?");
-        $stmt->execute([$this->id_proveedor]);
+        $stmt->execute([$id_Proveedor]);
         return $stmt->rowCount();
     }
 
     public function actualizarProveedor()
     {
         $stmt = $this->db->prepare("UPDATE proveedor SET nombre = ?, direccion = ?, telefono = ?, email = ? WHERE id_Proveedor = ?");
-        $stmt->execute([$this->nombre, $this->direccion, $this->telefono, $this->email, $this->id_proveedor]);
+        $stmt->execute([$this->nombre, $this->direccion, $this->telefono, $this->email, $this->id_Proveedor]);
         return $stmt->rowCount();
     }
 
@@ -119,13 +119,13 @@ class Proveedor{
         $stmt->execute([$id]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $id_proveedor = $row['id_Proveedor'];
+        $id_Proveedor = $row['id_Proveedor'];
         $nombre = $row['nombre'];
         $direccion = $row['direccion'];
         $telefono = $row['telefono'];
         $email = $row['email'];
 
-        return new Proveedor($id_proveedor, $nombre, $direccion, $telefono, $email);
+        return new Proveedor($id_Proveedor, $nombre, $direccion, $telefono, $email);
     }
 
 

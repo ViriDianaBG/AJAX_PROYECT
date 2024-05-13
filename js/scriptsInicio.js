@@ -134,6 +134,20 @@ function sesionIniciada() {
   });
 }
 
+function cerrarSesion() {
+  console.log("Funcion cerrarSesion");
+  $("#cerrarSesion").click(function () {
+    console.log("Funcion cerrarSesion");
+    $.ajax({
+      url: "php/Controller/cerrarSesion.php",
+      type: "POST",
+      success: function (response) {
+        sesionIniciada();
+      },
+    });
+  });
+}
+
 function cajeroBtn() {
   console.log("Funcion cajeroBtn");
   $("#CajeroButton").click(function () {
@@ -167,19 +181,7 @@ function productoBtn() {
   });
 }
 
-function cerrarSesion() {
-  console.log("Funcion cerrarSesion");
-  $("#cerrarSesion").click(function () {
-    console.log("Funcion cerrarSesion");
-    $.ajax({
-      url: "php/Controller/cerrarSesion.php",
-      type: "POST",
-      success: function (response) {
-        sesionIniciada();
-      },
-    });
-  });
-}
+
 
 function menuAdmin() {
   console.log("Funcion menuAdmin");
@@ -210,14 +212,180 @@ function proveedorBtn() {
         console.log("ProveedoresButton");
         $("#contenedor").html(response);
         menuAdmin();
+        mostrarProveedores();
       },
     });
   });
 }
 
+function mostrarProveedores() {
+  console.log("Funcion mostrarProveedores");
+  $.ajax({
+    url: "php/Controller/mostrarProveedores.php",
+    type: "POST",
+    success: function (response) {
+      console.log("proveedoresLista");
+      $("#proveedores").html(response);
+      btnEditarProveedor();
+      btnEliminarProveedor();
+      btnAgregarProveedor();
+    },
+  });
+
+}
+
+function btnEditarProveedor() {
+  console.log("Funcion btnEditarProveedor");
+  $(".editarBtn").click(function () {
+    console.log("Funcion btnEditarProveedor");
+    var id = $(this).data("id");
+    console.log("proveedor:" + id);
+    $.ajax({
+      url: "php/Controller/editarProveedorForm.php",
+      type: "POST",
+      data: { id: id },
+      success: function (response) {
+        console.log("BotonEditarProveedor");
+        $("#contenedor").html(response);
+        editarFormProveedor();
+      },
+    });
+  });
+}
+
+function btnEliminarProveedor() {
+  console.log("Funcion btnEliminarProveedor");
+  $(".eliminarBtn").click(function () {
+    console.log("Funcion btnEliminarProveedor");
+    var id = $(this).data("id");
+    $.ajax({
+      url: "php/Controller/eliminarBotonProveedor.php",
+      type: "POST",
+      data: { id: id },
+      success: function (response) {
+        console.log("ProveedorEliminado");
+        console.log(response);
+        mostrarProveedores();
+      },
+    });
+    console.log(id);
+  });
+
+}
+
+function btnAgregarProveedor() {
+  console.log("Funcion btnAgregarProveedor");
+  $("#agregarProveedor").click(function () {
+    console.log("clickAgregarProveedor");
+    $.ajax({
+      url: "php/Controller/agregarProveedorForm.php",
+      type: "POST",
+      success: function (response) {
+        console.log("agregarProveedor");
+        $("#contenedor").html(response);
+        agregarFormProveedor();
+      },
+    });
+  });
+
+
+}
+
+function agregarFormProveedor() {
+  $("#agregarProveedorForm").on("submit", function (e) {
+    e.preventDefault();
+    var nombre = $("#nombre").val();
+    var direccion = $("#direccion").val();
+    var telefono = $("#telefono").val();
+    var email = $("#email").val();
+
+    console.log(
+      nombre +
+        " " +
+        telefono +
+        " " +
+        email +
+        " " +
+        direccion
+    );
+    $.ajax({
+      url: "php/Controller/setAgregarInfoProveedor.php",
+      type: "POST",
+      data: {
+        nombre: nombre,
+        telefono: telefono,
+        email: email,
+        direccion: direccion,
+      },
+      success: function (response) {
+        console.log("agregarProveedorActualizado");
+        console.log(response);
+        sesionIniciada();
+      },
+    });
+  });
+
+}
+
+function editarFormProveedor() {
+  $("#editarProveedorForm").on("submit", function (e) {
+    e.preventDefault();
+    var id = $("#id").data("id");
+    var nombre = $("#nombre").val();
+    var telefono = $("#telefono").val();
+    var email = $("#email").val();
+    var direccion = $("#direccion").val();
+
+    console.log(
+      id +
+        " " +
+        nombre +
+        " " +
+        telefono +
+        " " +
+        email +
+        " " +
+        direccion
+    );
+    $.ajax({
+      url: "php/Controller/setEditarInfoProveedor.php",
+      type: "POST",
+      data: {
+        id: id,
+        nombre: nombre,
+        telefono: telefono,
+        email: email,
+        direccion: direccion,
+      },
+      success: function (response) {
+        console.log("editarProveedorActualizado");
+        console.log(response);
+        sesionIniciada();
+      },
+    });
+  });
+
+}
+
+function mostrarCajeros() {
+  console.log("Funcion mostrarCajeros");
+  $.ajax({
+    url: "php/Controller/mostrarCajeros.php",
+    type: "POST",
+    success: function (response) {
+      console.log("cajerosLista");
+      $("#cajeros").html(response);
+      btnEditarCajero();
+      btnEliminarCajero();
+      btnAgregarCajero();
+    },
+  });
+}
+
+
 function btnEditarCajero() {
   console.log("Funcion btnEditarCajero");
-  $(".editarBtn").click(function () {
+  $(".editarBtnProveedor").click(function () {
     console.log("Funcion btnEditarCajero");
     var id = $(this).data("id");
     console.log("cajero:" + id);
@@ -269,23 +437,6 @@ function btnAgregarCajero() {
     });
   });
 
-}
-
-
-
-function mostrarCajeros() {
-  console.log("Funcion mostrarCajeros");
-  $.ajax({
-    url: "php/Controller/mostrarCajeros.php",
-    type: "POST",
-    success: function (response) {
-      console.log("cajerosLista");
-      $("#cajeros").html(response);
-      btnEditarCajero();
-      btnEliminarCajero();
-      btnAgregarCajero();
-    },
-  });
 }
 
 function editarFormCajero() {

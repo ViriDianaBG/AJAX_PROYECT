@@ -1,9 +1,10 @@
 <?php
 include_once '../Model/cajero.php';  
 
-if(isset($_POST['nombre']) && isset($_POST['apellidoPaterno']) && isset($_POST['apellidoMaterno']) && isset($_POST['email']) && isset($_POST['telefono']) && isset($_POST['direccion']))
+if(isset($_POST['id'])&& isset($_POST['nombre']) && isset($_POST['apellidoPaterno']) && isset($_POST['apellidoMaterno']) && isset($_POST['email']) && isset($_POST['telefono']) && isset($_POST['direccion']))
 {
     $cajero = new Cajero();
+    $cajero = $cajero->obtenerCajeroPorId($_POST['id']);
     $cajero->setNombre($_POST['nombre']);
     $cajero->setApellidoPaterno($_POST['apellidoPaterno']);
     $cajero->setApellidoMaterno($_POST['apellidoMaterno']);
@@ -15,7 +16,7 @@ if(isset($_POST['nombre']) && isset($_POST['apellidoPaterno']) && isset($_POST['
     echo "Cajero guardado";
 
     echo "<br>";
-    echo "<p value='".$cajero->getNombre()."'>";
+    echo "Nombre: " . $cajero->getNombre();
 }
 else
 {   

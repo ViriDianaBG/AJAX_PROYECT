@@ -58,9 +58,6 @@ class Cajero
     return $stmt->rowCount();
 }
 
-
-
-
   //Eliminar cajero
   public function eliminarCajero($id_Cajero)
   {
