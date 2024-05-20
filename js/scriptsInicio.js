@@ -2,8 +2,6 @@ $(document).ready(function () {
   sesionIniciada();
 });
 
-var $pagina = 0;
-
 function formularioInicioSesionCajero() {
   $("#inicioSesionForm").submit(function (e) {
     e.preventDefault();
@@ -17,7 +15,7 @@ function formularioInicioSesionCajero() {
       data: { email: email, contrasenia: contrasenia },
       success: function (response) {
         if (parseInt(response) == 200) {
-          console.log("hola por aqui");
+          console.log(" Hola, soy Cajero");
           $("#contenedor").load("php/View/puntoVenta.php", function () {
             $("#cerrarSesion").click(function () {
               $.ajax({
@@ -55,7 +53,7 @@ function formularioInicioSesionAdmin() {
       data: { email: email, contrasenia: contrasenia },
       success: function (response) {
         if (parseInt(response) == 200) {
-          console.log("hola por aqui");
+          console.log("Hola, soy Administrador");
           $("#contenedor").load("php/View/paginaAdmin.php", function () {
             cerrarSesion();
             cajeroBtn();
@@ -86,8 +84,10 @@ function sesionIniciada() {
       if (parseInt(response) == 200) {
         console.log("HOLA");
         console.log("Sesión iniciada CAJERO");
-        $("#contenedor").load("php/View/paginaCajero.php", function () {
+        $("#contenedor").load("php/View/puntoVenta.php", function () {
+          //puntoVenta();
           cerrarSesion();
+          busquedaProducto();
         });
       } else if (parseInt(response) == 201) {
         console.log("Sesión iniciada ADMIN");
@@ -101,7 +101,6 @@ function sesionIniciada() {
       } else {
         console.log("Sesión no iniciada");
         $("#contenedor").load("php/View/inicio.php", function () {
-          
           $("#cajeroBoton").click(function () {
             $.ajax({
               url: "php/View/inicioSesionCajero.php",
@@ -148,6 +147,26 @@ function cerrarSesion() {
   });
 }
 
+function menuAdmin() {
+  console.log("Funcion menuAdmin");
+  $("#menuBoton").click(function () {
+    console.log("Funcion menuAdmin");
+    $.ajax({
+      url: "php/View/paginaAdmin.php",
+      type: "POST",
+      success: function (response) {
+        $("#contenedor").html(response);
+        cerrarSesion();
+        cajeroBtn();
+        productoBtn();
+        proveedorBtn();
+      },
+    });
+  });
+}
+
+function puntoVenta() {}
+
 function cajeroBtn() {
   console.log("Funcion cajeroBtn");
   $("#CajeroButton").click(function () {
@@ -176,26 +195,6 @@ function productoBtn() {
         console.log("ProductosButton");
         $("#contenedor").html(response);
         menuAdmin();
-      },
-    });
-  });
-}
-
-
-
-function menuAdmin() {
-  console.log("Funcion menuAdmin");
-  $("#menuBoton").click(function () {
-    console.log("Funcion menuAdmin");
-    $.ajax({
-      url: "php/View/paginaAdmin.php",
-      type: "POST",
-      success: function (response) {
-        $("#contenedor").html(response);
-        cerrarSesion();
-        cajeroBtn();
-        productoBtn();
-        proveedorBtn();
       },
     });
   });
@@ -231,7 +230,6 @@ function mostrarProveedores() {
       btnAgregarProveedor();
     },
   });
-
 }
 
 function btnEditarProveedor() {
@@ -270,7 +268,6 @@ function btnEliminarProveedor() {
     });
     console.log(id);
   });
-
 }
 
 function btnAgregarProveedor() {
@@ -287,8 +284,6 @@ function btnAgregarProveedor() {
       },
     });
   });
-
-
 }
 
 function agregarFormProveedor() {
@@ -299,15 +294,7 @@ function agregarFormProveedor() {
     var telefono = $("#telefono").val();
     var email = $("#email").val();
 
-    console.log(
-      nombre +
-        " " +
-        telefono +
-        " " +
-        email +
-        " " +
-        direccion
-    );
+    console.log(nombre + " " + telefono + " " + email + " " + direccion);
     $.ajax({
       url: "php/Controller/setAgregarInfoProveedor.php",
       type: "POST",
@@ -324,7 +311,6 @@ function agregarFormProveedor() {
       },
     });
   });
-
 }
 
 function editarFormProveedor() {
@@ -337,15 +323,7 @@ function editarFormProveedor() {
     var direccion = $("#direccion").val();
 
     console.log(
-      id +
-        " " +
-        nombre +
-        " " +
-        telefono +
-        " " +
-        email +
-        " " +
-        direccion
+      id + " " + nombre + " " + telefono + " " + email + " " + direccion
     );
     $.ajax({
       url: "php/Controller/setEditarInfoProveedor.php",
@@ -364,7 +342,6 @@ function editarFormProveedor() {
       },
     });
   });
-
 }
 
 function mostrarCajeros() {
@@ -382,10 +359,9 @@ function mostrarCajeros() {
   });
 }
 
-
 function btnEditarCajero() {
   console.log("Funcion btnEditarCajero");
-  $(".editarBtnProveedor").click(function () {
+  $(".editarBtn").click(function () {
     console.log("Funcion btnEditarCajero");
     var id = $(this).data("id");
     console.log("cajero:" + id);
@@ -401,7 +377,6 @@ function btnEditarCajero() {
     });
   });
 }
-
 
 function btnEliminarCajero() {
   console.log("Funcion btnEliminarCajero");
@@ -436,7 +411,6 @@ function btnAgregarCajero() {
       },
     });
   });
-
 }
 
 function editarFormCajero() {
@@ -504,13 +478,13 @@ function agregarFormCajero() {
         " " +
         apellidoMaterno +
         " " +
-        email + 
+        email +
         " " +
         contrasenia +
         " " +
         direccion +
         " " +
-        telefono 
+        telefono
     );
     $.ajax({
       url: "php/Controller/guardarCajeroC.php",
@@ -528,6 +502,207 @@ function agregarFormCajero() {
         console.log("agregarCajeroActualizado");
         console.log(response);
         sesionIniciada();
+      },
+    });
+  });
+}
+
+function productoBtn() {
+  console.log("Funcion productosBtn");
+  $("#ProductosButton").click(function () {
+    console.log("Funcion ProductosButton");
+    $.ajax({
+      url: "php/View/producto.php",
+      type: "POST",
+      success: function (response) {
+        console.log("ProductosButton");
+        $("#contenedor").html(response);
+        menuAdmin();
+        mostrarProductos();
+      },
+    });
+  });
+}
+
+function mostrarProductos() {
+  console.log("Funcion mostrarProductos");
+  $.ajax({
+    url: "php/Controller/mostrarProductos.php",
+    type: "POST",
+    success: function (response) {
+      console.log("productosLista");
+      $("#productos").html(response);
+      btnEditarProducto();
+      btnEliminarProducto();
+      btnAgregarProducto();
+    },
+  });
+}
+
+function btnEditarProducto() {
+  console.log("Funcion btnEditarProducto");
+  $(".editarBtn").click(function () {
+    console.log("Funcion btnEditarProducto");
+    var id = $(this).data("id");
+    console.log("producto:" + id);
+    $.ajax({
+      url: "php/Controller/editarProductoForm.php",
+      type: "POST",
+      data: { id: id },
+      success: function (response) {
+        console.log("BotonEditarProducto");
+        $("#contenedor").html(response);
+        editarFormProducto();
+      },
+    });
+  });
+}
+
+function editarFormProducto() {
+  $("#editarProductoForm").on("submit", function (e) {
+    e.preventDefault();
+    var id = $("#id").data("id");
+    var nombre = $("#nombre").val();
+    var precio = $("#precio").val();
+    var stock = $("#stock").val();
+    var descripcion = $("#descripcion").val();
+    var categoria = $("#categoria").val();
+    var marca = $("#marca").val();
+    var proveedor = $("#proveedor").val();
+
+    console.log(
+      id +
+        " " +
+        nombre +
+        " " +
+        precio +
+        " " +
+        stock +
+        " " +
+        descripcion +
+        " " +
+        categoria +
+        " " +
+        marca +
+        " " +
+        proveedor
+    );
+
+    $.ajax({
+      url: "php/Controller/setEditarInfoProducto.php",
+      type: "POST",
+      data: {
+        id: id,
+        nombre: nombre,
+        precio: precio,
+        stock: stock,
+        descripcion: descripcion,
+        categoria: categoria,
+        marca: marca,
+        proveedor: proveedor,
+      },
+      success: function (response) {
+        console.log("editarProductoActualizado");
+        console.log(response);
+        sesionIniciada();
+      },
+    });
+  });
+}
+
+function btnEliminarProducto() {
+  console.log("Funcion btnEliminarProducto");
+  $(".eliminarBtn").click(function () {
+    console.log("Funcion btnEliminarProducto");
+    var id = $(this).data("id");
+    $.ajax({
+      url: "php/Controller/eliminarBotonProducto.php",
+      type: "POST",
+      data: { id: id },
+      success: function (response) {
+        console.log("ProductoEliminado");
+        console.log(response);
+        mostrarProductos();
+      },
+    });
+    console.log(id);
+  });
+}
+
+function btnAgregarProducto() {
+  console.log("Funcion btnAgregarProducto");
+  $("#agregarProducto").click(function () {
+    console.log("clickAgregarProducto");
+    $.ajax({
+      url: "php/Controller/agregarProductoForm.php",
+      type: "POST",
+      success: function (response) {
+        console.log("agregarProducto");
+        $("#contenedor").html(response);
+        agregarFormProducto();
+      },
+    });
+  });
+}
+
+function agregarFormProducto() {
+  $("#agregarProductoForm").on("submit", function (e) {
+    e.preventDefault();
+    var nombre = $("#nombre").val();
+    var precio = $("#precio").val();
+    var stock = $("#stock").val();
+    var descripcion = $("#descripcion").val();
+    var categoria = $("#categoria").val();
+    var marca = $("#marca").val();
+    var proveedor = $("#proveedor").val();
+
+    console.log(
+      nombre +
+        " " +
+        precio +
+        " " +
+        stock +
+        " " +
+        descripcion +
+        " " +
+        categoria +
+        " " +
+        marca +
+        " " +
+        proveedor
+    );
+    $.ajax({
+      url: "php/Controller/setAgregarInfoProducto.php",
+      type: "POST",
+      data: {
+        nombre: nombre,
+        precio: precio,
+        stock: stock,
+        descripcion: descripcion,
+        categoria: categoria,
+        marca: marca,
+        proveedor: proveedor,
+      },
+      success: function (response) {
+        console.log("agregarProductoActualizado");
+        console.log(response);
+        sesionIniciada();
+      },
+    });
+  });
+}
+
+function busquedaProducto() {
+  $("#buscador").on("keyup", function () {
+    var nombre = $(this).val().toLowerCase();
+    console.log(nombre);
+    $.ajax({
+      url: "php/Controller/busquedaProductos.php",
+      type: "POST",
+      data: { nombre: nombre },
+      success: function (response) {
+        console.log("BusquedaProducto");
+        $("#tablaProductos").html(response);
       },
     });
   });

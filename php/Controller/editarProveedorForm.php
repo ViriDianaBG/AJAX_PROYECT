@@ -1,9 +1,8 @@
 <?php
-include_once '../Model/cajero.php';
+include_once '../Model/proveedor.php';
 
 if(isset($_POST['id']))
 {
-    include_once '../Model/proveedor.php';
     $proveedor = new Proveedor();
     $proveedor = $proveedor->obtenerProveedorPorId($_POST['id']);
   

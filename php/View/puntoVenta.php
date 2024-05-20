@@ -9,6 +9,12 @@
 
   <body>
     <h3> Punto de venta </h3>
+    <div class="busqueda">
+    <input type="text" id="buscador" placeholder="Buscar producto">
+    </div> 
+    <button type='button' id='btnbuscar' > Buscar </button>
+     <div id="listaProductos"></div>
+    <button id="menuBoton">Menu</button>
     <button id="cerrarSesion">Cerrar</button>
   </body>
 

@@ -9,6 +9,7 @@
 
   <body>
     <h3> Página cajero </h3>
+    <div class="busqueda"></div>
     <button id="cerrarSesion">Cerrar</button>
   </body>
 
