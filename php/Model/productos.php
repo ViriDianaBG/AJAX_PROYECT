@@ -14,7 +14,6 @@ class Producto
     private $proveedor;
     private $db;
 
-
     public function __construct($id_Producto = null, $nombre = null, $precio = null, $stock = null, $descripcion = null, $categoria = null, $marca = null, $proveedor = null, $db = null)
     {
         global $db;
@@ -55,8 +54,7 @@ class Producto
         INSERT INTO mydb.Productos (nombre, precio, stock, descripcion, categoria, marca, proveedor) 
         VALUES (?, ?, ?, ?, (SELECT id_Categoria FROM mydb.Categoria WHERE nombre = ?), 
         (SELECT id_Marca FROM mydb.Marca WHERE nombre = ?), 
-        (SELECT id_Proveedor FROM mydb.Proveedor WHERE nombre = ?))
-    ");
+        (SELECT id_Proveedor FROM mydb.Proveedor WHERE nombre = ?)) ");
         $stmt->execute([$this->nombre, $this->precio, $this->stock, $this->descripcion, $this->categoria, $this->marca, $this->proveedor]);
 
         $this->id_Producto = $this->db->lastInsertId();
@@ -168,6 +166,7 @@ class Producto
         return $productos;
 
     }
+    
 
 
     public function getIdProducto()
