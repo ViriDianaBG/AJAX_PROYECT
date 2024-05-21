@@ -1,4 +1,3 @@
-/* Reset y estilos básicos */
 * {
   margin: 0;
   padding: 0;
@@ -8,14 +7,42 @@
   font-style: normal;
 }
 
+:root {
+  --color1: #edeec9;
+  --color2: #dde7c7;
+  --color3: #bfd8bd;
+  --color4: #98c9a3;
+  --color5: #77bfa3;
+  --relleno: bisque;
+  
+
+  --font: "Abhaya Libre", serif;
+  --titulo: 500em; /* Eliminado "font-size:" */
+}
+
+h2 {
+  font-size: 3em;
+  color: var(--color1);
+  margin: 1em 0;
+}
+
+h1 {
+  font-size: 5em;
+  color: var(--color1);
+  margin: 1em 0;
+}
+
 body {
-  background-color: #EFDDC9;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  background-color: var(--color2);
+  background-image: url("../resources/fondo3.jpg");
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 /* Estilos para el contenedor de opciones */
@@ -42,8 +69,8 @@ body {
 /* Estilos para los botones */
 button {
   color: var(--color);
-  background-color: var(--relleno);
-  border: 2px solid var(--color);
+  background-color: var(--color1);
+  border: 2px solid var(--color4);
   font: inherit;
   line-height: 1;
   margin: 0.5em;
@@ -51,7 +78,8 @@ button {
   transition: 0.5s;
 }
 
-button:hover, button:focus {
+button:hover,
+button:focus {
   border-color: var(--hover);
   color: #fff;
 }
@@ -64,9 +92,8 @@ button:hover, button:focus {
 
 /* Colores específicos para fill */
 .fill {
-  --color: #CC883A;
+  --color: #cc883a;
   --hover: #d8c729;
-  --relleno: bisque;
 }
 
 @-webkit-keyframes pulse {
@@ -89,9 +116,28 @@ code {
 
 /* Contenedores adicionales */
 .contenedor {
-  background-color: rgb(16, 141, 141);
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  background: inherit;
+  overflow: hidden;
   align-items: center;
   padding: 1em;
+  position: relative;
+  z-index: 1;
+}
+
+.contenedor::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background: inherit;
+  filter:grayscale()  blur(10px);
+  border-radius: 5px; /* Add border-radius to blur effect */
+  color: rgb(62, 97, 62);
 }
 
 .carrito {
@@ -104,4 +150,8 @@ code {
 
 .productosCarrito {
   background-color: brown;
+}
+
+.image {
+  background-color:var(--color2);
 }
