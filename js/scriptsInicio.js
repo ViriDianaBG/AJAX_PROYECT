@@ -85,7 +85,6 @@ function sesionIniciada() {
         console.log("HOLA");
         console.log("Sesión iniciada CAJERO");
         $("#contenedor").load("php/View/puntoVenta.php", function () {
-          //puntoVenta();
           cerrarSesion();
           busquedaProducto();
         });
@@ -164,8 +163,6 @@ function menuAdmin() {
     });
   });
 }
-
-function puntoVenta() {}
 
 function cajeroBtn() {
   console.log("Funcion cajeroBtn");
@@ -696,14 +693,49 @@ function busquedaProducto() {
   $("#buscador").on("keyup", function () {
     var nombre = $(this).val().toLowerCase();
     console.log(nombre);
+    // Verificar si el campo de búsqueda está vacío
+    if (nombre.trim() !== "") {
+      $.ajax({
+        url: "php/Controller/busquedaProductos.php",
+        type: "POST",
+        data: { nombre: nombre },
+        success: function (response) {
+          console.log("BusquedaProducto");
+          $("#listaProductos").html(response);
+          agregarCarrito();
+        },
+      });
+    } else {
+      // Si el campo de búsqueda está vacío, limpiar la tabla
+      $("#listaProductos").empty();
+    }
+  });
+}
+
+function agregarVenta(){
+  $(".agregarVenta").click(function(){
+    console.log("AgregarVenta");
+    var id = $(this).data("id");
+    console.log(id);
     $.ajax({
-      url: "php/Controller/busquedaProductos.php",
+      url: "php/Controller/agregarVenta.php",
       type: "POST",
-      data: { nombre: nombre },
+      data: { id: id },
       success: function (response) {
-        console.log("BusquedaProducto");
-        $("#tablaProductos").html(response);
+        console.log("VentaAgregada");
+        console.log(response);
+        $("#contenedor").html(response);
       },
     });
   });
 }
+
+function agregarCarrito(){
+  $(".agregarProducto").click(function(){
+    console.log("AgregarProducto");
+    var id = $(this).data("id");
+    console.log(id);
+    
+  });
+}
+

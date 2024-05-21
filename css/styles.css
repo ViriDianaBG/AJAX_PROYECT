@@ -1,10 +1,107 @@
-*{
+/* Reset y estilos básicos */
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
+  font-family: "Abhaya Libre", serif;
+  font-weight: 800;
+  font-style: normal;
 }
 
-.contenedor{
-  background-color: aqua;
+body {
+  background-color: #EFDDC9;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* Estilos para el contenedor de opciones */
+.options-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2em; /* Espacio entre las opciones */
+}
+
+/* Estilos para cada opción individual */
+.option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image {
+  width: 20%;
+  height: auto;
+  margin-bottom: 0.5em;
+}
+
+/* Estilos para los botones */
+button {
+  color: var(--color);
+  background-color: var(--relleno);
+  border: 2px solid var(--color);
+  font: inherit;
+  line-height: 1;
+  margin: 0.5em;
+  padding: 1em 2em;
+  transition: 0.5s;
+}
+
+button:hover, button:focus {
+  border-color: var(--hover);
+  color: #fff;
+}
+
+/* Animación fill */
+.fill:hover,
+.fill:focus {
+  box-shadow: inset 0 0 0 2em var(--hover);
+}
+
+/* Colores específicos para fill */
+.fill {
+  --color: #CC883A;
+  --hover: #d8c729;
+  --relleno: bisque;
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--hover);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--hover);
+  }
+}
+
+/* Estilos adicionales para la accesibilidad visual */
+code {
+  color: #e4cb58;
+  font: inherit;
+}
+
+/* Contenedores adicionales */
+.contenedor {
+  background-color: rgb(16, 141, 141);
+  align-items: center;
+  padding: 1em;
+}
+
+.carrito {
+  background-color: bisque;
+}
+
+.busqueda {
+  background-color: blueviolet;
+}
+
+.productosCarrito {
+  background-color: brown;
 }
