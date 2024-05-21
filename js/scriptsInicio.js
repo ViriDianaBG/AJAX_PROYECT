@@ -703,6 +703,7 @@ function busquedaProducto() {
           console.log("BusquedaProducto");
           $("#listaProductos").html(response);
           agregarCarrito();
+          eliminrCarrito();
         },
       });
     } else {
@@ -712,8 +713,8 @@ function busquedaProducto() {
   });
 }
 
-function agregarVenta(){
-  $(".agregarVenta").click(function(){
+function agregarVenta() {
+  $(".agregarVenta").click(function () {
     console.log("AgregarVenta");
     var id = $(this).data("id");
     console.log(id);
@@ -730,12 +731,34 @@ function agregarVenta(){
   });
 }
 
-function agregarCarrito(){
-  $(".agregarProducto").click(function(){
-    console.log("AgregarProducto");
+
+function eliminarCarrito() {
+  $(".eliminarProducto").click(function () {
     var id = $(this).data("id");
     console.log(id);
-    
+    $.ajax({
+      url: "php/Controller/gestorCarrito.php",
+      type: "POST",
+      data: { id: id, operacion: "eliminar" },
+      success: function (response) {
+        $("#carrito").html(response);
+        eliminarCarrito();
+      },
+    });
   });
 }
 
+function agregarCarrito() {
+  $(".agregarProducto").click(function () {
+    var id = $(this).data("id");
+    $.ajax({
+      url: "php/Controller/gestorCarrito.php",
+      type: "POST",
+      data: { id: id, operacion: "agregar" },
+      success: function (response) {
+        $("#carrito").html(response);
+        eliminarCarrito();
+      },
+    });
+  });
+}
