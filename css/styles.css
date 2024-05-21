@@ -7,31 +7,6 @@
   font-style: normal;
 }
 
-:root {
-  --color1: #edeec9;
-  --color2: #dde7c7;
-  --color3: #bfd8bd;
-  --color4: #98c9a3;
-  --color5: #A3B18A;
-  --relleno: bisque;
-  --color6: #3A5A40;
-
-  --font: "Abhaya Libre", serif;
-  --titulo: 500em; /* Eliminado "font-size:" */
-}
-
-h2 {
-  font-size: 3em;
-  color: var(--color);
-  margin: 1em 0;
-}
-
-h1 {
-  font-size: 5em;
-  color: var(--color);
-  margin: 1em 0;
-}
-
 body {
   text-align: center;
   display: flex;

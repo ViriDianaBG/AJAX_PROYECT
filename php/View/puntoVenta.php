@@ -12,14 +12,14 @@
 
   <div class="contenedorPuntoVenta" id="contenedorPuntoVenta">
     <!-- cabecera -->
+    <h3>Carrito</h3>
     <div class="carrito" id="carrito">
-      <h3>Carrito</h3>
     </div>
     <!-- menu -->
     <div class="busqueda" id="busqueda">
-      
+
       <input type="text" id="buscador" placeholder="Buscar producto">
-    
+
     </div>
     <!-- contenido -->
     <div class="productosCarrito" id="listaProductos">
