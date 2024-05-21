@@ -12,9 +12,9 @@
   --color2: #dde7c7;
   --color3: #bfd8bd;
   --color4: #98c9a3;
-  --color5: #77bfa3;
+  --color5: #A3B18A;
   --relleno: bisque;
-  
+  --color6: #3A5A40;
 
   --font: "Abhaya Libre", serif;
   --titulo: 500em; /* Eliminado "font-size:" */
@@ -22,13 +22,13 @@
 
 h2 {
   font-size: 3em;
-  color: var(--color1);
+  color: var(--color);
   margin: 1em 0;
 }
 
 h1 {
   font-size: 5em;
-  color: var(--color1);
+  color: var(--color);
   margin: 1em 0;
 }
 
@@ -40,7 +40,7 @@ body {
   justify-content: center;
   min-height: 100vh;
   background-color: var(--color2);
-  background-image: url("../resources/fondo3.jpg");
+  background-image: url("../resources/fondo6.jpg");
   background-attachment: fixed;
   background-size: cover;
 }
@@ -61,9 +61,12 @@ body {
 }
 
 .image {
-  width: 20%;
+  width: 30%;
   height: auto;
   margin-bottom: 0.5em;
+  padding: 1em;
+  background-color: var(--color5);
+  border-radius: 2em;
 }
 
 /* Estilos para los botones */
@@ -135,9 +138,10 @@ code {
   bottom: 0;
   z-index: -1;
   background: inherit;
-  filter:grayscale()  blur(10px);
+  filter: grayscale(50%)  blur(10px);
   border-radius: 5px; /* Add border-radius to blur effect */
   color: rgb(62, 97, 62);
+  border-inline-color: rgb(62, 97, 62);
 }
 
 .carrito {
@@ -152,6 +156,4 @@ code {
   background-color: brown;
 }
 
-.image {
-  background-color:var(--color2);
-}
+
