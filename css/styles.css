@@ -43,6 +43,35 @@ h1 {
   font-size: 5em;
   color: var(--color1);
   margin: 1em 0;
+  background-color: var(--color2);
+  background-image: url("../resources/fondo6.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+
+:root {
+  --color1: #EDEEC9;
+  --color2: #DDE7C7;
+  --color3: #BFD8BD;
+  --color4: #98C9A3;
+  --color5: #77BFA3;
+  --relleno: bisque;
+  --prueba: #29d8c6;
+  --font: 'Abhaya Libre', serif;
+  --titulo: 500em; /* Eliminado "font-size:" */
+}
+
+h2 {
+  font-size: 3em;
+  color: var(--color1);
+  margin: 1em 0;
+}
+
+h1 {
+  font-size: 5em;
+  color: var(--color1);
+  margin: 1em 0;
 }
 
 /* Estilos para el contenedor de opciones */
@@ -62,8 +91,12 @@ h1 {
 
 .image {
   width: 30%;
+  width: 30%;
   height: auto;
   margin-bottom: 0.5em;
+  padding: 1em;
+  background-color: var(--color5);
+  border-radius: 2em;
   padding: 1em;
   background-color: var(--color5);
   border-radius: 2em;
@@ -74,6 +107,8 @@ button {
   color: var(--color);
   background-color: var(--color1);
   border: 2px solid var(--color4);
+  background-color: var(--color1);
+  border: 2px solid var(--color4);
   font: inherit;
   line-height: 1;
   margin: 0.5em;
@@ -81,6 +116,8 @@ button {
   transition: 0.5s;
 }
 
+button:hover,
+button:focus {
 button:hover,
 button:focus {
   border-color: var(--hover);
@@ -95,6 +132,7 @@ button:focus {
 
 /* Colores específicos para fill */
 .fill {
+  --color: #cc883a;
   --color: #cc883a;
   --hover: #d8c729;
 }
@@ -123,8 +161,29 @@ code {
   border-radius: 5px;
   background: inherit;
   overflow: hidden;
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  background: inherit;
+  overflow: hidden;
   align-items: center;
   padding: 1em;
+  position: relative;
+  z-index: 1;
+}
+
+.contenedor::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background: inherit;
+  filter: grayscale(50%)  blur(10px);
+  border-radius: 5px; /* Add border-radius to blur effect */
+  color: rgb(62, 97, 62);
+  border-inline-color: rgb(62, 97, 62);
   position: relative;
   z-index: 1;
 }
