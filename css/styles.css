@@ -20,6 +20,31 @@ body {
   background-size: cover;
 }
 
+
+:root {
+  --color1: #EDEEC9;
+  --color2: #DDE7C7;
+  --color3: #BFD8BD;
+  --color4: #98C9A3;
+  --color5: #77BFA3;
+  --relleno: bisque;
+  --prueba: #29d8c6;
+  --font: 'Abhaya Libre', serif;
+  --titulo: 500em; /* Eliminado "font-size:" */
+}
+
+h2 {
+  font-size: 3em;
+  color: var(--color1);
+  margin: 1em 0;
+}
+
+h1 {
+  font-size: 5em;
+  color: var(--color1);
+  margin: 1em 0;
+}
+
 /* Estilos para el contenedor de opciones */
 .options-container {
   display: flex;
