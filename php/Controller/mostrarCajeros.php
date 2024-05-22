@@ -4,7 +4,7 @@ include '../Model/cajero.php';
 $cajeroModel = new Cajero();
 $cajeros = $cajeroModel->obtenerCajeros();
 
-echo "<table>";
+echo "<table class='custom-table'>";
 echo "<tr>";
 echo "<th>ID</th>";
 echo "<th>Nombre</th>";
@@ -16,8 +16,8 @@ foreach ($cajeros as $cajero) {
   echo "<td>" . htmlspecialchars($cajero->getIdCajero()) . "</td>"; 
   echo "<td>" . htmlspecialchars($cajero->getNombre()) ." " . htmlspecialchars($cajero->getApellidoPaterno()). " " . htmlspecialchars($cajero->getApellidoMaterno()). "</td>"; 
   echo "<td>";
-  echo "<button class='editarBtn' data-id='" . htmlspecialchars($cajero->getIdCajero()) . "' >Editar</button>";
-  echo "<button class='eliminarBtn' data-id='" . htmlspecialchars($cajero->getIdCajero()) . "' >Eliminar</button>";
+  echo "<button class='editarBtn'  data-id='" . htmlspecialchars($cajero->getIdCajero()) . "' >Editar</button>";
+  echo "<button class='eliminarBtn'  data-id='" . htmlspecialchars($cajero->getIdCajero()) . "' >Eliminar</button>";
   echo "</td>";
   echo "</tr>";
 }

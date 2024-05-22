@@ -2,18 +2,21 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-   <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usuarios</title>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio</title>
+  <link rel="stylesheet" href="./css/stylessCajero.css">
   </head>
   <body>
-  <div id="cajeros">
-    
+    <div class="container">
+    <div id="cajeros">
+      <!-- Contenido de cajeros aquí -->
+    </div>
+    <div class="buttons">
+      <button id="agregarCajero" class="fill">Agregar</button>
+      <button id="menuBoton" class="fill">Menu</button>
+    </div>
   </div>
 
-<button id="agregarCajero" >Agregar</button>
-
-
-<button id="menuBoton">Menu</button>
   </body>
 </html>

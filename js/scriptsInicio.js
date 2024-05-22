@@ -370,6 +370,7 @@ function btnEditarCajero() {
         console.log("BotonEditarCajero");
         $("#contenedor").html(response);
         editarFormCajero();
+        RegresarCajero();
       },
     });
   });
@@ -405,10 +406,41 @@ function btnAgregarCajero() {
         console.log("agregarCajero");
         $("#contenedor").html(response);
         agregarFormCajero();
+        Regresar();
       },
     });
   });
 }
+
+function Regresar(){
+  $("#cancelar").click(function () {
+    console.log("Funcion Regresar");
+    $.ajax({
+      url: "php/View/paginaAdmin.php",
+      type: "POST",
+      success: function (response) {
+        console.log("Regresar");
+        $("#contenedor").html(response);
+      },
+    });
+  });
+}
+
+function RegresarCajero(){
+  $("#regresar").click(function () {
+    console.log("Funcion Regresar");
+    $.ajax({
+      url: "php/Controller/mostrarCajeros.php",
+      type: "POST",
+      success: function (response) {
+        console.log("Regresar");
+        $("#contenedor").html(response);
+      },
+    });
+  });
+
+}
+
 
 function editarFormCajero() {
   $("#editarCajeroForm").on("submit", function (e) {

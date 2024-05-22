@@ -5,7 +5,7 @@ include_once '../Model/productos.php';
   $producto = new Producto();
   $productos = $producto->obtenerProductos();
 
-  echo "<table>";
+  echo "<table  class='custom-table'>";
   echo "<tr>";
   echo "<th>ID</th>";
   echo "<th>Nombre</th>";

@@ -1,0 +1,170 @@
+
+
+.container {
+  text-align: center;
+  padding: 2em;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#cajeros {
+  margin-bottom: 2em;
+  /* Aquí puedes agregar más estilos para el contenido de cajeros */
+}
+
+
+/* Estilos para los botones */
+button {
+  color: var(--color);
+  background-color: var(--color1);
+  border: 2px solid var(--color1);
+  font: inherit;
+  line-height: 1;
+  margin: 0.5em;
+  padding: 1em 2em;
+  transition: 0.5s;
+}
+
+button:hover,
+button:focus {
+  border-color: var(--color5);
+  color: #fff;
+}
+/* Animación fill */
+.fill:hover,
+.fill:focus,
+.editarBtn:hover,
+.editarBtn:focus,
+.eliminarBtn:hover,
+.eliminarBtn:focus {
+  box-shadow: inset 0 0 0 2em var(--color5);
+}
+
+/* Colores específicos para fill */
+.fill,.editarBtn,.eliminarBtn {
+  --color: #cc883a;
+  --color: #cc883a;
+  --hover: #d8c729;
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--hover);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--hover);
+  }
+}
+
+/* Estilos adicionales para la accesibilidad visual */
+code {
+  color: #e4cb58;
+  font: inherit;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 5px;
+}
+
+.custom-table th, .custom-table td {
+  border: 2px solid var(--color7);
+  padding: 8px;
+  text-align: left;
+}
+
+.custom-table th {
+  background-color: var(--color9);
+}
+
+.custom-table tr:nth-child(even) {
+  background-color: var(--color5); /* Color de fondo para filas pares */
+}
+
+.custom-table tr:nth-child(odd) {
+  background-color: var(--color9); /* Color de fondo para filas impares */
+}
+
+.custom-table tr:hover {
+  background-color: var(--color8);
+}
+
+/* Estilos para el formulario */
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto; 
+  color: var(--color4);
+  font-size: 150%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1em;
+  width: 50%;
+}
+
+label {
+  margin-bottom: 0.5em;
+  color: var(--color8);
+  text-align: center;
+  width: 40%;
+  font-size: 20px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="email"],#descripcion,#categoria {
+ width: 100%; /* Ajusta el ancho al 100% del contenedor */
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+  padding: 0.5em 2em;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--color5);
+  color: #fff;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+  background-color: var(--color4);
+}
+
+
+:root {
+  --color1: #EDEEC9;
+  --color2: #DDE7C7;
+  --color3: #BFD8BD;
+  --color4: #98C9A3;
+  --color5: #77BFA3;
+  --color6: #b1decf;
+  --color7: #06592f;
+  --color8: #f4c922;
+  --color9: #2b6849;
+  --relleno: bisque;
+  --prueba: #29d8c6;
+  --font: 'Abhaya Libre', serif;
+  --titulo: 500em; /* Eliminado "font-size:" */
+}
+
+.apellidoPaterno{
+  color: var(--prueba);
+}

@@ -1,0 +1,93 @@
+
+
+h1 {
+  font-size: 3em;
+  color: var(--color1);
+  margin: 1em 0;
+}
+
+.options-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1px; /* Reduce el espacio horizontal entre las opciones */
+  flex-wrap: wrap;
+}
+
+.option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image {
+  width: 30%;
+  height: auto;
+  margin-bottom: 0.5em;
+  padding: 1em;
+  background-color: var(--color7);
+  border-radius: 2em;
+  padding: 1em;
+}
+
+
+/* Estilos para los botones */
+button {
+  color: var(--color);
+  background-color: var(--color1);
+  border: 2px solid var(--color1);
+  font: inherit;
+  line-height: 1;
+  margin: 0.5em;
+  padding: 1em 2em;
+  transition: 0.5s;
+}
+
+button:hover,
+button:focus {
+  border-color: var(--color5);
+  color: #fff;
+}
+/* Animación fill */
+.fill:hover,
+.fill:focus {
+  box-shadow: inset 0 0 0 2em var(--color5);
+}
+
+/* Colores específicos para fill */
+.fill {
+  --color: #cc883a;
+  --color: #cc883a;
+  --hover: #d8c729;
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--hover);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--hover);
+  }
+}
+
+/* Estilos adicionales para la accesibilidad visual */
+code {
+  color: #e4cb58;
+  font: inherit;
+}
+
+/* Root color variables */
+:root {
+  --color1: #EDEEC9;
+  --color2: #DDE7C7;
+  --color3: #BFD8BD;
+  --color4: #98C9A3;
+  --color5: #77BFA3;
+  --relleno: bisque;
+  --prueba: #29d8c6;
+  --font: 'Abhaya Libre', serif;
+  --titulo: 500em; /* Eliminado "font-size:" */
+}

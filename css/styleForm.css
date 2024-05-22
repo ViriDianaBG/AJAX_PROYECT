@@ -1,0 +1,100 @@
+
+/* Estilos para el formulario */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  color: var(--prueba);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1em;
+  width: 100%;
+  padding: 2em;
+}
+
+label {
+  margin-bottom: 0.5em;
+  color: var(--color9);
+  text-align: left;
+  width: 40%;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"]
+{
+  font-size: 50px;
+  width: 40%;
+  padding: 0.5em;
+  border: 1px solid var(--color4);
+  border-radius: 5px;
+  text-align: center;
+}
+
+input[type="submit"] {
+  padding: 0.5em 2em;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--color5);
+  color: #fff;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+  background-color: var(--color4);
+}
+
+.contenedorForm {
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  background: inherit;
+  overflow: hidden;
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  background: inherit;
+  overflow: hidden;
+  align-items: center;
+  padding: 1em;
+  position: relative;
+  z-index: 1;
+  border: 5px solid var(--color3);
+}
+
+.contenedorForm::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background: inherit;
+  filter: grayscale(50%)  blur(10px);
+  border-radius: 5px; /* Add border-radius to blur effect */
+  color: rgb(62, 97, 62);
+  border-inline-color: rgb(62, 97, 62);
+}
+
+
+:root {
+  --color1: #EDEEC9;
+  --color2: #DDE7C7;
+  --color3: #BFD8BD;
+  --color4: #98C9A3;
+  --color5: #77BFA3;
+  --color6: #b1decf;
+  --color7: #06592f;
+  --color8: #f4c922;
+  --color9: #2b6849;
+  --relleno: bisque;
+  --prueba: #29d8c6;
+  --font: 'Abhaya Libre', serif;
+  --titulo: 500em; /* Eliminado "font-size:" */
+}
