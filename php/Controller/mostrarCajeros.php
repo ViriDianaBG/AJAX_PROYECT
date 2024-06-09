@@ -3,7 +3,7 @@ include '../Model/cajero.php';
 
 $cajeroModel = new Cajero();
 $cajeros = $cajeroModel->obtenerCajeros();
-
+echo "<div class='content-main'>";
 echo "<table class='custom-table'>";
 echo "<tr>";
 echo "<th>ID</th>";
@@ -22,4 +22,4 @@ foreach ($cajeros as $cajero) {
   echo "</tr>";
 }
 
-echo "</table>";
+echo "</table></div>";

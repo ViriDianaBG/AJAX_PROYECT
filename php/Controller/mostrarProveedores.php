@@ -3,8 +3,8 @@ include_once '../Model/proveedor.php';
 
 $proveedor = new Proveedor();
 $proveedores = $proveedor->mostrarProveedores();
-
-echo "<table>";
+ echo "<div class='content-main'>";
+echo "<table class='custom-table-producto'>";
 echo "<tr>";
 echo "<th>ID</th>";
 echo "<th>Nombre</th>";
@@ -28,4 +28,4 @@ foreach ($proveedores as $proveedor) {
   echo "</tr>";
 }
 
-echo "</table>";
+  echo "</table></div>";

@@ -11,10 +11,7 @@
 </head>
 
 <body>
-  <p>index.php</p>
-  <div class="contenedor" id="contenedor" >ggg</div>
- 
-  
+  <div class="contenedor" id="contenedor" >ggg</div>  
 </body>
 
 </html>

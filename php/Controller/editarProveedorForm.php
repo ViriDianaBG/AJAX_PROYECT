@@ -5,12 +5,14 @@ if(isset($_POST['id']))
 {
     $proveedor = new Proveedor();
     $proveedor = $proveedor->obtenerProveedorPorId($_POST['id']);
-  
-    echo "ID: " . $proveedor->getIdProveedor() . "<br>";
-    echo "Nombre: " . $proveedor->getNombre() . "<br>";
-    echo "Direccion: " . $proveedor->getDireccion() . "<br>";
-    echo "Telefono: " . $proveedor->getTelefono() . "<br>";
-    echo "Email: " . $proveedor->getEmail() . "<br>";
+    echo "<h2>Información actual</h2>";
+    echo "<div class='cajero-info'>";
+    echo "<h3 id='titulo'>ID:</h3> <p>" . $proveedor->getIdProveedor() . "<br>";
+    echo "<h3 id='titulo'>Nombre:</h3> <p>" . $proveedor->getNombre() . "<br>";
+    echo "<h3 id='titulo'>Direccion:</h3> <p>" . $proveedor->getDireccion() . "<br>";
+    echo "<h3 id='titulo'>Telefono:</h3> <p>" . $proveedor->getTelefono() . "<br>";
+    echo "<h3 id='titulo'>Email:</h3> <p>" . $proveedor->getEmail() . "<br>";
+    echo "</div>";
 
     echo "<h2>Editar información</h2>";
     echo "<form id='editarProveedorForm' method='POST'>";

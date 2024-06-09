@@ -18,9 +18,6 @@
 
     </form> 
 
-    
-
-    <h3>Inicio de sesión</h3>
   </body>
 
 </html>

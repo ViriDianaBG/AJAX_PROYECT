@@ -166,6 +166,11 @@ class Producto
         return $productos;
 
     }
+
+    public function stock(){
+        $sql = 'SELECT * ';
+
+    }
     
 
 

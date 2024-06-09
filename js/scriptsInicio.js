@@ -88,6 +88,7 @@ function sesionIniciada() {
           cerrarSesion();
           busquedaProducto();
         });
+
       } else if (parseInt(response) == 201) {
         console.log("Sesión iniciada ADMIN");
         $("#contenedor").load("php/View/paginaAdmin.php", function () {
@@ -97,7 +98,8 @@ function sesionIniciada() {
           productoBtn();
           proveedorBtn();
         });
-      } else {
+      } 
+      else {
         console.log("Sesión no iniciada");
         $("#contenedor").load("php/View/inicio.php", function () {
           $("#cajeroBoton").click(function () {
@@ -713,8 +715,6 @@ function agregarFormProducto() {
         proveedor: proveedor,
       },
       success: function (response) {
-        console.log("agregarProductoActualizado");
-        console.log(response);
         sesionIniciada();
       },
     });
@@ -732,10 +732,12 @@ function busquedaProducto() {
         type: "POST",
         data: { nombre: nombre },
         success: function (response) {
-          console.log("BusquedaProducto");
           $("#listaProductos").html(response);
           agregarCarrito();
-          eliminrCarrito();
+          eliminarCarrito();
+          pagarCarritoEfectivo();
+          pagarCarritoTarjeta();
+          valorEfectivo();
         },
       });
     } else {
@@ -755,9 +757,9 @@ function agregarVenta() {
       type: "POST",
       data: { id: id },
       success: function (response) {
-        console.log("VentaAgregada");
-        console.log(response);
         $("#contenedor").html(response);
+        pagarCarritoEfectivo();
+        pagarCarritoTarjeta();
       },
     });
   });
@@ -775,6 +777,8 @@ function eliminarCarrito() {
       success: function (response) {
         $("#carrito").html(response);
         eliminarCarrito();
+        pagarCarritoEfectivo();
+        pagarCarritoTarjeta();
       },
     });
   });
@@ -790,6 +794,74 @@ function agregarCarrito() {
       success: function (response) {
         $("#carrito").html(response);
         eliminarCarrito();
+        pagarCarritoEfectivo();
+        pagarCarritoTarjeta();
+      },
+    });
+  });
+}
+
+function pagarCarritoEfectivo(){
+  $(".efectivoBoton").click(function () {
+    console.log("pagarCarritoEfectivoEfectivo");
+   /*  var id = $(this).data("id"); */
+    $.ajax({
+      url: "php/Controller/gestorCarrito.php",
+      type: "POST",
+      data: { pago: "efectivo" },
+      success: function (response) {
+        $("#contenedor").html(response);
+        valorEfectivo();
+        nuevaCompra();
+      },
+    });
+  });
+
+  
+}
+
+function pagarCarritoTarjeta(){
+  $("#tarjetaBoton").click(function () {
+    console.log("pagarCarritoEfectivoEfectivo");
+    $.ajax({
+      url: "php/Controller/gestorCarrito.php",
+      type: "POST",
+      data: { pago: "tarjeta" },
+      success: function (response) {
+        $("#contenedor").html(response);
+        nuevaCompra();
+      },
+    });
+  });
+}
+
+function valorEfectivo(){
+  $("#pagoEfectivo").on('click', function () {
+    console.log("hola bola");
+    var total = $("#total").data('value');
+    console.log('Total:' + total);
+    var efectivo = $("#efectivo").val();
+    console.log('Efectivo :' + efectivo);
+    var resultado = efectivo - total;
+    console.log('Resultado: ' + resultado);
+
+    $("#resultado").text(resultado.toFixed(2));
+    if(resultado >= 0){
+    $("#resultado").text("Tu cuenta ha sido pagada, Cambio: " + (resultado.toFixed(2)));
+    }
+  });
+}
+
+
+function nuevaCompra(){
+  $("#nuevaCompra").click(function () {
+    console.log("nuevaCompra");
+    $.ajax({
+      url: "php/Controller/gestorCarrito.php",
+      type: "POST",
+      success: function (response) {
+        $("#contenedor").html(response);
+        sesionIniciada();
       },
     });
   });

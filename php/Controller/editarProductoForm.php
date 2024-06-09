@@ -6,15 +6,17 @@ if(isset($_POST['id'])){
 
   $producto = new Producto();
   $producto = $producto->obtenerProductoPorId($_POST['id']);
-
-  echo "ID: " . $producto->getIdProducto() . "<br>";
-  echo "Nombre: " . $producto->getNombre() . "<br>";
-  echo "Precio: " . $producto->getPrecio() . "<br>";
-  echo "Existencia: " . $producto->getStock() . "<br>";
-  echo "Descripción: " . $producto->getDescripcion() . "<br>";
-  echo "Categoría: " . $producto->getCategoria() . "<br>";
-  echo "Marca: " . $producto->getMarca() . "<br>";
-  echo "Proveedor: " . $producto->getProveedor() . "<br>";
+  echo "<h2>Información actual</h2>";
+  echo "<div class='cajero-info'>";
+  echo "<h3 id='titulo'>ID:</h3> <p>" . $producto->getIdProducto() . "</p>";
+  echo "<h3 id='titulo'>Nombre:</h3> <p> " . $producto->getNombre() . "</p>";
+  echo "<h3 id='titulo'>Precio:</h3> <p> " . $producto->getPrecio() . "</p>";
+  echo "<h3 id='titulo'>Stock:</h3> <p> " . $producto->getStock() . "</p>";
+  echo "<h3 id='titulo'>Descripción:</h3> <p> " . $producto->getDescripcion() . "</p>";
+  echo "<h3 id='titulo'>Categoría:</h3> <p>" . $producto->getCategoria() . "</p>";
+  echo "<h3 id='titulo'>Marca:</h3> <p> " . $producto->getMarca() . "<br>";
+  echo "<h3 id='titulo'>Proveedor:</h3> <p>" . $producto->getProveedor() . "</p>";
+  echo "</div>";
 
   echo '<form id="editarProductoForm" method="POST">';
 

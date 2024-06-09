@@ -4,8 +4,8 @@ include_once '../Model/productos.php';
 
   $producto = new Producto();
   $productos = $producto->obtenerProductos();
-
-  echo "<table  class='custom-table'>";
+  echo "<div class='content-main'>";
+  echo "<table  class='custom-table-producto'>";
   echo "<tr>";
   echo "<th>ID</th>";
   echo "<th>Nombre</th>";
@@ -36,7 +36,7 @@ include_once '../Model/productos.php';
     echo "</tr>";
   }
 
-  echo "</table>";
+  echo "</table></div>";
 
 
 

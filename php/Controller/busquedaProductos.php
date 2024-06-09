@@ -11,6 +11,7 @@ if (isset($_POST['nombre']))
     {
         foreach ($productos as $producto)
         {
+            // echo "<div class='content-main'>";
             echo "<table class='tablaProductos'>";
             echo "<thead>";
             echo "<tr>";
@@ -24,12 +25,13 @@ if (isset($_POST['nombre']))
             // Mostrar el nombre del producto solo en la primera fila
             echo "<tr>";
             echo "<td>" . $producto->getIdProducto() . "</td>";
-            echo "<td rowspan='3'><p id='nombre'>" . $producto->getNombre() . "</p></td>"; // rowspan indica cuántas filas ocupará esta celda
+            echo "<td rowspan='3'><h3 id='nombre'>" . $producto->getNombre() . "</p></td>"; // rowspan indica cuántas filas ocupará esta celda
             echo "<td>" . $producto->getPrecio() . "</td>";
             echo "</tr>";
 
             echo "</tbody>";
             echo "</table>";
+            // echo "</div>";
 
             echo "<button id='agregarProducto' data-id='" . $producto->getIdProducto() . "' class='agregarProducto'>Agregar</button>";
         }
